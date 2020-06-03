@@ -1,7 +1,8 @@
 @echo off
 chcp 1251
-cls
+
 :x00
+cls
 echo.
 echo  ----------------------------------------------------------
 echo      Меню
@@ -27,7 +28,7 @@ echo "1 - Анализ текущего состояния хранилища к
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 echo.
 pause
-goto x0
+goto x00
 
 :x2
 cls
@@ -36,7 +37,7 @@ echo "2 - Удаление предыдущих версий для текуще
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup
 echo.
 pause
-goto x0
+goto x00
 
 
 :x3
@@ -46,7 +47,7 @@ echo "3 - Полное удаление предыдущих версий"
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 echo.
 pause
-goto x0
+goto x00
 
 :x0
 exit
