@@ -15,6 +15,7 @@ echo  5 - Полное удаление всех стандартных прил
 echo  6 - Восстановление всех стандартных приложений
 echo  7 - Установка магазина (Microsoft Store)
 echo  8 - Настройка реестра
+echo  9 - Очистка Диска
 echo  0 - Выход         
 echo  ----------------------------------------------------------
 echo.
@@ -29,6 +30,7 @@ if /i '%N%'=='5' goto x5
 if /i '%N%'=='6' goto x6
 if /i '%N%'=='7' goto x7
 if /i '%N%'=='8' goto x8
+if /i '%N%'=='9' goto x9
 if /i '%N%'=='0' goto x0
 
 :x1
@@ -177,6 +179,19 @@ REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry" /V
 echo.
 pause
 goto x00
+
+:x9
+cls
+echo.
+echo Очистка диска - ждем ...
+rem start /WAIT cleanmgr /LowDisk
+start /WAIT cleanmgr /sageset:65535 & cleanmgr /sagerun:65535
+cls
+echo.
+echo Очистка диска выполнена.
+pause
+goto x00
+
 
 :x0
 exit
