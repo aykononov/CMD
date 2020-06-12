@@ -133,7 +133,7 @@ echo.
 echo Настройка реестра:
 echo ------------------------------------------------------
 echo Отключить фоновое изображение входа
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /V "DisableLogonBackgroundImage" /t REG_DWORD /F /D "1"
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V "DisableLogonBackgroundImage" /t REG_DWORD /F /D "1"
 
 echo Отключаем «Кортану»
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V "AllowCortana" /t REG_DWORD /F /D "0"
@@ -204,8 +204,6 @@ REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc" /V "Start" 
 echo.
 pause
 goto x00
-
-
 
 :x0
 exit
