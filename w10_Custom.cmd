@@ -4,20 +4,20 @@ chcp 1251
 :x00
 cls
 echo.
-echo  ----------------------------------------------------------
-echo      Windows Custom
-echo  ----------------------------------------------------------
-echo  1 - Анализ текущего состояния хранилища компонент (WinSxS) 
-echo  2 - Удаление предыдущих версий для текущего пользователя
-echo  3 - Полное удаление предыдущих версий
-echo  4 - Вывод установленных пакетов
-echo  5 - Полное удаление всех стандартных приложений
-echo  6 - Восстановление всех стандартных приложений
-echo  7 - Установка магазина (Microsoft Store)
-echo  8 - Настройка реестра
-echo  9 - Очистка Диска
-echo  0 - Выход         
-echo  ----------------------------------------------------------
+echo  -----------------------------------------------------------------
+echo    Windows Custom
+echo  -----------------------------------------------------------------
+echo  1 (WinSxS) Анализ текущего состояния хранилища компонент
+echo  2 - (WinSxS) Удаление предыдущих версий для текущего пользователя
+echo  3 - (WinSxS) Полное удаление предыдущих версий
+echo  4 (Packages) Вывод установленных пакетов
+echo  5 - (Packages) Полное удаление всех стандартных приложений
+echo  6 - (Packages) Восстановление всех стандартных приложений
+echo  7 (Microsoft Store) Установка магазина
+echo  8 (Cleanmgr) Очистка Диска
+echo  9 Настройка реестра
+echo  0 - Выход
+echo  ------------------------------------------------------------------
 echo.
 
 SET /P N=" Введите номер: "
@@ -110,8 +110,24 @@ echo.
 pause
 goto x00
 
-
 :x8
+cls
+echo.
+echo Очистка диска - ждем ...
+net stop wuauserv
+DEL /S /F /Q %TEMP%\*
+RD /S /Q %WINDIR%\SoftwareDistribution\Download
+echo Очистка каталгов (%TEMP%, %WINDIR%\SoftwareDistribution\Download) - выполнено.
+net start wuauserv
+start /WAIT cleanmgr /LowDisk
+rem start /WAIT cleanmgr /sageset:65535 & cleanmgr /sagerun:65535
+rem cls
+echo.
+echo Очистка диска выполнена.
+pause
+goto x00
+
+:x9
 cls
 echo.
 echo Настройка реестра:
@@ -176,21 +192,19 @@ REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc" /V "Star
 echo Отключить службу «Удаленный реестр»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry" /V "Start" /t REG_DWORD /F /D "4"
 
+echo Отключить службу «Служба управления радио»
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RmSvc" /V "Start" /t REG_DWORD /F /D "4"
+
+echo Отключить службу «Служба сенсорной клавиатуры и панели рукописного ввода»
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TabletInputService" /V "Start" /t REG_DWORD /F /D "4"
+
+echo Отключить службу «Служба географического положения»
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc" /V "Start" /t REG_DWORD /F /D "4"
+
 echo.
 pause
 goto x00
 
-:x9
-cls
-echo.
-echo Очистка диска - ждем ...
-rem start /WAIT cleanmgr /LowDisk
-start /WAIT cleanmgr /sageset:65535 & cleanmgr /sagerun:65535
-cls
-echo.
-echo Очистка диска выполнена.
-pause
-goto x00
 
 
 :x0
