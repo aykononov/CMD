@@ -1,15 +1,15 @@
 '* ***********************************************
-'* Имя:: ARM_SpecInfo.vbs                        *
-'* Язык: VBScript                                *
-'* Описание: Вывод информации о спецификации АРМ *
-'* Версия: 1.1.6                                 *
-'* Автор: Кононов А.Ю.      	      24.06.2015 *
+'* РРјСЏ:: ARM_SpecInfo.vbs                        *
+'* РЇР·С‹Рє: VBScript                                *
+'* РћРїРёСЃР°РЅРёРµ: Р’С‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ СЃРїРµС†РёС„РёРєР°С†РёРё РђР Рњ *
+'* Р’РµСЂСЃРёСЏ: 1.1.6                                 *
+'* РђРІС‚РѕСЂ: РљРѕРЅРѕРЅРѕРІ Рђ.Р®.      	      24.06.2015 *
 '*************************************************
 
 'On Error Resume Next
-strComputer = inputbox ("Введите имя компьютера или (IP-адрес):", "Спецификация компьютера",".")
+strComputer = inputbox ("Р’РІРµРґРёС‚Рµ РёРјСЏ РєРѕРјРїСЊСЋС‚РµСЂР° РёР»Рё (IP-Р°РґСЂРµСЃ):", "РЎРїРµС†РёС„РёРєР°С†РёСЏ РєРѕРјРїСЊСЋС‚РµСЂР°",".")
 Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2") 
-' ------------------ Сетевая информация (IP-адрес версии IPv4) -----------------------------------------------------------------
+' ------------------ РЎРµС‚РµРІР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ (IP-Р°РґСЂРµСЃ РІРµСЂСЃРёРё IPv4) -----------------------------------------------------------------
 Set IPConfigSet = objWMIService.ExecQuery ("Select IPAddress from Win32_NetworkAdapterConfiguration Where IPEnabled = true",,48)
 For Each IPConfig in IPconfigSet
 	if InStr(IPConfig.IPAddress(0),PPTPNework) > 0 then 
@@ -199,7 +199,7 @@ Set colItems = objWMIService.ExecQuery ("SELECT * FROM Win32_PnPEntity WHERE Des
 	fileOutput.WriteLn " <TR><TD width='30%' align=left bgcolor='#e0e0e0'>" & objItem.Manufacturer & "</TD><td width='70%' bgcolor=#f0f0f0 align=left>" & objItem.Name & "</td></tr>"
         Next
 '------------- BATTERY Information --------------
-Set colItems = objWMIService.ExecQuery ("SELECT * FROM Win32_PnPSignedDriver WHERE DeviceClass = 'BATTERY' and Description <> 'Составная батарея (Майкрософт)'",,48)
+Set colItems = objWMIService.ExecQuery ("SELECT * FROM Win32_PnPSignedDriver WHERE DeviceClass = 'BATTERY' and Description <> 'РЎРѕСЃС‚Р°РІРЅР°СЏ Р±Р°С‚Р°СЂРµСЏ (РњР°Р№РєСЂРѕСЃРѕС„С‚)'",,48)
 	For Each objItem in colItems 
 	BatUPS = objItem.DeviceClass
         Next
@@ -224,7 +224,7 @@ fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0
 'Set colItems = objWMIService.ExecQuery ("SELECT * FROM Win32_Printer where Local=True",,48)
 Set colItems = objWMIService.ExecQuery ("SELECT * FROM Win32_Printer",,48)
 For Each objItem in colItems
-		If objItem.Name <> "Отправить в OneNote 2010" then
+		If objItem.Name <> "РћС‚РїСЂР°РІРёС‚СЊ РІ OneNote 2010" then
 			If objItem.Name <> "Microsoft XPS Document Writer" then
 				If objItem.Name <> "Fax" then
 fileOutput.WriteLn "                                        <TR><TD width='30%' align=left bgcolor='#e0e0e0'>" & objItem.Name & " <TD width='70%' align=left bgcolor='#f0f0f0'>" & objItem.PortName & "</td></tr>"
@@ -260,7 +260,7 @@ Next
 'fileOutput.WriteLn "                                            <TABLE width='100%' cellspacing='1' cellpadding='2' border='1' bordercolor='#c0c0c0' bordercolordark='#ffffff' bordercolorlight='#c0c0c0'>"
 
 'Set colItem = objWMIService.ExecQuery ("SELECT * FROM Win32_Process Where Name = 'hwd.exe' ") 
-' Проверяем запущен ли процесс HWD.exe
+' РџСЂРѕРІРµСЂСЏРµРј Р·Р°РїСѓС‰РµРЅ Р»Рё РїСЂРѕС†РµСЃСЃ HWD.exe
 '	If colItem.Count = 0 Then
 '		fileOutput.WriteLn " <TR><TD width='40%' align=center bgcolor='#f0f0f0'>Daemon HWD</TD><td bgcolor=#f0d0d0 align=center>Not Running !!!</td></tr>"'
 '		Else
@@ -288,7 +288,7 @@ Next
 'Const ParamVin = "VpnKey_Inserted"
 
 'Set objReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\default:StdRegProv")
-' Чтение HEX - параметра реестра -------------------------
+' Р§С‚РµРЅРёРµ HEX - РїР°СЂР°РјРµС‚СЂР° СЂРµРµСЃС‚СЂР° -------------------------
 'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVhi, HiVal
 'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVlo, LoVal
 'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVbn, BnVal
@@ -323,7 +323,7 @@ Next
 'Const Param1 = "UninstallString"
 'Const Param2 = "DisplayName"
 
-' Чтение Строкового параметра реестра -------------------------
+' Р§С‚РµРЅРёРµ РЎС‚СЂРѕРєРѕРІРѕРіРѕ РїР°СЂР°РјРµС‚СЂР° СЂРµРµСЃС‚СЂР° -------------------------
 
 'objReg.GetStringValue HKEY_LOCAL_MACHINE, tKeyPath, Param1, lVal
 'objReg.GetStringValue HKEY_LOCAL_MACHINE, tKeyPath, Param2, pVal
@@ -350,14 +350,14 @@ Next
 'Const uKeyPath = "SOFTWARE\Infocrypt\WinNet 3.0\Users"
 
 
-' -------- Чтение параметров ветки в массив arrValues
+' -------- Р§С‚РµРЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ РІРµС‚РєРё РІ РјР°СЃСЃРёРІ arrValues
 'intRes = objReg.EnumValues (HKEY_LOCAL_MACHINE, uKeyPath, arrValues)
 'If intRes = 0 Then
 'fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>WinNet Users Logon</b></TD></TR>"
-' -------- Чтение значений параметров в массиве PassKey
+' -------- Р§С‚РµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ РїР°СЂР°РјРµС‚СЂРѕРІ РІ РјР°СЃСЃРёРІРµ PassKey
 '	For i = Lbound(arrValues) To Ubound(arrValues)
 '	intRes = objReg.GetStringValue (HKEY_LOCAL_MACHINE, uKeyPath, arrValues(i), PassKey)
-' -------- проверка пустого значения
+' -------- РїСЂРѕРІРµСЂРєР° РїСѓСЃС‚РѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
 '		If PassKey <> "" Then
 'fileOutput.WriteLn "                                        <TR><TD width='30%' align=left bgcolor='#e0e0e0'>" & arrValues(i) & "</TD><td width='70%' bgcolor=#f0f0f0 align=left>" & PassKey & "</td></tr>"
 '		End If
