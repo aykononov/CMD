@@ -7,20 +7,20 @@ echo.
 echo  -----------------------------------------------------------------
 echo    Windows Custom
 echo  -----------------------------------------------------------------
-echo  1 (WinSxS) Анализ текущего состояния хранилища компонент
-echo  2 - (WinSxS) Удаление предыдущих версий для текущего пользователя
-echo  3 - (WinSxS) Полное удаление предыдущих версий
-echo  4 (Packages) Вывод установленных пакетов
-echo  5 - (Packages) Полное удаление всех стандартных приложений
-echo  6 - (Packages) Восстановление всех стандартных приложений
-echo  7 (Microsoft Store) Установка магазина
-echo  8 (Cleanmgr) Очистка Диска
-echo  9 Настройка реестра
-echo  0 - Выход
+echo  1 (WinSxS) РђРЅР°Р»РёР· С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ С…СЂР°РЅРёР»РёС‰Р° РєРѕРјРїРѕРЅРµРЅС‚
+echo  2 - (WinSxS) РЈРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РёС… РІРµСЂСЃРёР№ РґР»СЏ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+echo  3 - (WinSxS) РџРѕР»РЅРѕРµ СѓРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РёС… РІРµСЂСЃРёР№
+echo  4 (Packages) Р’С‹РІРѕРґ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹С… РїР°РєРµС‚РѕРІ
+echo  5 - (Packages) РџРѕР»РЅРѕРµ СѓРґР°Р»РµРЅРёРµ РІСЃРµС… СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРёР»РѕР¶РµРЅРёР№
+echo  6 - (Packages) Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РІСЃРµС… СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРёР»РѕР¶РµРЅРёР№
+echo  7 (Microsoft Store) РЈСЃС‚Р°РЅРѕРІРєР° РјР°РіР°Р·РёРЅР°
+echo  8 (Cleanmgr) РћС‡РёСЃС‚РєР° Р”РёСЃРєР°
+echo  9 РќР°СЃС‚СЂРѕР№РєР° СЂРµРµСЃС‚СЂР°
+echo  0 - Р’С‹С…РѕРґ
 echo  ------------------------------------------------------------------
 echo.
 
-SET /P N=" Введите номер: "
+SET /P N=" Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ: "
 
 if /i '%N%'=='1' goto x1
 if /i '%N%'=='2' goto x2
@@ -36,7 +36,7 @@ if /i '%N%'=='0' goto x0
 :x1
 cls
 echo.
-echo Анализ текущего состояния хранилища компонент (WinSxS)
+echo РђРЅР°Р»РёР· С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ С…СЂР°РЅРёР»РёС‰Р° РєРѕРјРїРѕРЅРµРЅС‚ (WinSxS)
 echo ------------------------------------------------------
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 echo.
@@ -46,7 +46,7 @@ goto x00
 :x2
 cls
 echo.
-echo Удаление предыдущих версий для текущего пользователя
+echo РЈРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РёС… РІРµСЂСЃРёР№ РґР»СЏ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 echo ------------------------------------------------------
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup
 echo.
@@ -57,7 +57,7 @@ goto x00
 :x3
 cls
 echo.
-echo Полное удаление предыдущих версий
+echo РџРѕР»РЅРѕРµ СѓРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РёС… РІРµСЂСЃРёР№
 echo ------------------------------------------------------
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 echo.
@@ -67,7 +67,7 @@ goto x00
 :x4
 cls
 echo.
-echo Вывод установленных пакетов
+echo Р’С‹РІРѕРґ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹С… РїР°РєРµС‚РѕРІ
 echo ------------------------------------------------------
 PowerShell -Command "&{Get-AppxPackage | Select Name, PackageFullName}"
 echo.
@@ -77,10 +77,10 @@ goto x00
 :x5
 cls
 echo.
-echo Полное удаление всех стандартных приложений
+echo РџРѕР»РЅРѕРµ СѓРґР°Р»РµРЅРёРµ РІСЃРµС… СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРёР»РѕР¶РµРЅРёР№
 echo ------------------------------------------------------
 PowerShell -ExecutionPolicy Unrestricted -Command "&{Get-AppxPackage -allusers | Remove-AppxPackage}"
-rem Удалить пакет *people* для всех пользователей Get-AppxPackage -allusers *people* | Remove-AppxPackage
+rem РЈРґР°Р»РёС‚СЊ РїР°РєРµС‚ *people* РґР»СЏ РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Get-AppxPackage -allusers *people* | Remove-AppxPackage
 
 echo.
 pause
@@ -89,9 +89,9 @@ goto x00
 :x6
 cls
 echo.
-echo Восстановление всех стандартных приложений
+echo Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РІСЃРµС… СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРёР»РѕР¶РµРЅРёР№
 echo ------------------------------------------------------
-rem команда для powershell: Get-AppxPackage *WindowsStore* -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppxManifest.xml"
+rem РєРѕРјР°РЅРґР° РґР»СЏ powershell: Get-AppxPackage *WindowsStore* -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppxManifest.xml"
 rem PowerShell -ExecutionPolicy Unrestricted -Command "& {$ manifest = (Get-AppxPackage Microsoft.WindowsStore) .InstallLocation + '\ AppxManifest.xml'; Add-AppxPackage -DisableDevelopmentMode -Register $ manifest}"
 PowerShell -ExecutionPolicy Unrestricted -Command "& {$manifest = (Get-AppxPackage -AllUsers).InstallLocation + '\AppxManifest.xml' ; Add-AppxPackage -DisableDevelopmentMode -Register $manifest}"
 echo.
@@ -101,9 +101,9 @@ goto x00
 :x7
 cls
 echo.
-echo Установка магазина (Microsoft Store)
+echo РЈСЃС‚Р°РЅРѕРІРєР° РјР°РіР°Р·РёРЅР° (Microsoft Store)
 echo ------------------------------------------------------
-rem команда для powershell: Get-AppxPackage *WindowsStore* -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppxManifest.xml"
+rem РєРѕРјР°РЅРґР° РґР»СЏ powershell: Get-AppxPackage *WindowsStore* -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppxManifest.xml"
 rem PowerShell -ExecutionPolicy Unrestricted -Command "& {$ manifest = (Get-AppxPackage Microsoft.WindowsStore) .InstallLocation + '\ AppxManifest.xml'; Add-AppxPackage -DisableDevelopmentMode -Register $ manifest}"
 PowerShell -ExecutionPolicy Unrestricted -Command "& {$manifest = (Get-AppxPackage *WindowsStore* -AllUsers).InstallLocation + '\AppxManifest.xml' ; Add-AppxPackage -DisableDevelopmentMode -Register $manifest}"
 echo.
@@ -113,92 +113,92 @@ goto x00
 :x8
 cls
 echo.
-echo Очистка диска - ждем ...
+echo РћС‡РёСЃС‚РєР° РґРёСЃРєР° - Р¶РґРµРј ...
 net stop wuauserv
 DEL /S /F /Q %TEMP%\*
 RD /S /Q %WINDIR%\SoftwareDistribution\Download
-echo Очистка каталгов (%TEMP%, %WINDIR%\SoftwareDistribution\Download) - выполнено.
+echo РћС‡РёСЃС‚РєР° РєР°С‚Р°Р»РіРѕРІ (%TEMP%, %WINDIR%\SoftwareDistribution\Download) - РІС‹РїРѕР»РЅРµРЅРѕ.
 net start wuauserv
 start /WAIT cleanmgr /LowDisk
 rem start /WAIT cleanmgr /sageset:65535 & cleanmgr /sagerun:65535
 rem cls
 echo.
-echo Очистка диска выполнена.
+echo РћС‡РёСЃС‚РєР° РґРёСЃРєР° РІС‹РїРѕР»РЅРµРЅР°.
 pause
 goto x00
 
 :x9
 cls
 echo.
-echo Настройка реестра:
+echo РќР°СЃС‚СЂРѕР№РєР° СЂРµРµСЃС‚СЂР°:
 echo ------------------------------------------------------
-echo Отключить фоновое изображение входа
+echo РћС‚РєР»СЋС‡РёС‚СЊ С„РѕРЅРѕРІРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РІС…РѕРґР°
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V "DisableLogonBackgroundImage" /t REG_DWORD /F /D "1"
 
-echo Отключаем «Кортану»
+echo РћС‚РєР»СЋС‡Р°РµРј В«РљРѕСЂС‚Р°РЅСѓВ»
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V "AllowCortana" /t REG_DWORD /F /D "0"
 
-echo Удалить папку «Видео»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«Р’РёРґРµРѕВ»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /F
 
-echo Удалить папку «Документы»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«Р”РѕРєСѓРјРµРЅС‚С‹В»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /F
 
-echo Удалить папку «Загрузки»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«Р—Р°РіСЂСѓР·РєРёВ»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /F
 
-echo Удалить папку «Изображения»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«РР·РѕР±СЂР°Р¶РµРЅРёСЏВ»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /F
 
-echo Удалить папку «Музыка»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«РњСѓР·С‹РєР°В»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /F
 
-echo Удалить папку «Объёмные объекты»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«РћР±СЉС‘РјРЅС‹Рµ РѕР±СЉРµРєС‚С‹В»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /F
 
-echo Удалить папку «Рабочий стол»
+echo РЈРґР°Р»РёС‚СЊ РїР°РїРєСѓ В«Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»В»
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /F
 
-echo Отключить службу «Факс»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«Р¤Р°РєСЃВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Fax" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Общий доступ к портам Net.Tcp»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РћР±С‰РёР№ РґРѕСЃС‚СѓРї Рє РїРѕСЂС‚Р°Рј Net.TcpВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetTcpPortSharing" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Рабочие папки»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«Р Р°Р±РѕС‡РёРµ РїР°РїРєРёВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\workfolderssvc" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить «Служба маршрутизатора AllJoyn»
+echo РћС‚РєР»СЋС‡РёС‚СЊ В«РЎР»СѓР¶Р±Р° РјР°СЂС€СЂСѓС‚РёР·Р°С‚РѕСЂР° AllJoynВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AJRouter" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Удостоверение приложения»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЈРґРѕСЃС‚РѕРІРµСЂРµРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppIDSvc" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить «Служба шифрования дисков BitLocker»
+echo РћС‚РєР»СЋС‡РёС‚СЊ В«РЎР»СѓР¶Р±Р° С€РёС„СЂРѕРІР°РЅРёСЏ РґРёСЃРєРѕРІ BitLockerВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BDESVC" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Функциональные возможности для подключенных пользователей и телеметрия»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«Р¤СѓРЅРєС†РёРѕРЅР°Р»СЊРЅС‹Рµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Рё С‚РµР»РµРјРµС‚СЂРёСЏВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Общий доступ к подключению к Интернету (ICS)»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РћР±С‰РёР№ РґРѕСЃС‚СѓРї Рє РїРѕРґРєР»СЋС‡РµРЅРёСЋ Рє РРЅС‚РµСЂРЅРµС‚Сѓ (ICS)В»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Сетевая служба Xbox Live»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЎРµС‚РµРІР°СЏ СЃР»СѓР¶Р±Р° Xbox LiveВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Биометрическая служба Windows»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«Р‘РёРѕРјРµС‚СЂРёС‡РµСЃРєР°СЏ СЃР»СѓР¶Р±Р° WindowsВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Удаленный реестр»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЈРґР°Р»РµРЅРЅС‹Р№ СЂРµРµСЃС‚СЂВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Служба управления радио»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЎР»СѓР¶Р±Р° СѓРїСЂР°РІР»РµРЅРёСЏ СЂР°РґРёРѕВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RmSvc" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Служба сенсорной клавиатуры и панели рукописного ввода»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЎР»СѓР¶Р±Р° СЃРµРЅСЃРѕСЂРЅРѕР№ РєР»Р°РІРёР°С‚СѓСЂС‹ Рё РїР°РЅРµР»Рё СЂСѓРєРѕРїРёСЃРЅРѕРіРѕ РІРІРѕРґР°В»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TabletInputService" /V "Start" /t REG_DWORD /F /D "4"
 
-echo Отключить службу «Служба географического положения»
+echo РћС‚РєР»СЋС‡РёС‚СЊ СЃР»СѓР¶Р±Сѓ В«РЎР»СѓР¶Р±Р° РіРµРѕРіСЂР°С„РёС‡РµСЃРєРѕРіРѕ РїРѕР»РѕР¶РµРЅРёСЏВ»
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc" /V "Start" /t REG_DWORD /F /D "4"
 echo.
 pause
