@@ -5,17 +5,17 @@ echo.
 echo  --------------------------
 echo      ARM_SpecSettings
 echo  --------------------------
-echo  1 - Включить USB 
-echo  2 - Отключить USB
-echo  3 - Локальный вход
-echo  4 - Откат (Локальный вход)
-echo  5 - Очистка Far
-echo  6 - Валютное Табло
-echo  7 - Сетевые настройки SBCORP
-echo  0 - Выход         
+echo  1 - ╨Т╨║╨╗╤О╤З╨╕╤В╤М USB 
+echo  2 - ╨Ю╤В╨║╨╗╤О╤З╨╕╤В╤М USB
+echo  3 - ╨Ы╨╛╨║╨░╨╗╤М╨╜╤Л╨╣ ╨▓╤Е╨╛╨┤
+echo  4 - ╨Ю╤В╨║╨░╤В (╨Ы╨╛╨║╨░╨╗╤М╨╜╤Л╨╣ ╨▓╤Е╨╛╨┤)
+echo  5 - ╨Ю╤З╨╕╤Б╤В╨║╨░ Far
+echo  6 - ╨Т╨░╨╗╤О╤В╨╜╨╛╨╡ ╨в╨░╨▒╨╗╨╛
+echo  7 - ╨б╨╡╤В╨╡╨▓╤Л╨╡ ╨╜╨░╤Б╤В╤А╨╛╨╣╨║╨╕ SBCORP
+echo  0 - ╨Т╤Л╤Е╨╛╨┤         
 echo  --------------------------
 echo.
-SET /P N=" Введите номер: "
+SET /P N=" ╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╜╨╛╨╝╨╡╤А: "
 
 if /i '%N%'=='1' goto x1
 if /i '%N%'=='2' goto x2
@@ -32,7 +32,7 @@ REG ADD HKLM\SYSTEM\CurrentControlSet\Services\USBSTOR /v Start /t REG_DWORD /d 
 rem REG ADD HKLM\SYSTEM\CurrentControlSet\Services\USBSTOR /v Start /t REG_DWORD /d 00000004 /f
 echo.
 echo  ------------
-echo  USB включено 
+echo  USB ╨▓╨║╨╗╤О╤З╨╡╨╜╨╛ 
 echo  ------------
 echo.
 pause
@@ -45,7 +45,7 @@ rem REG ADD HKLM\SYSTEM\CurrentControlSet\Services\USBSTOR /v Start /t REG_DWORD
 REG ADD HKLM\SYSTEM\CurrentControlSet\Services\USBSTOR /v Start /t REG_DWORD /d 00000004 /f
 echo.
 echo  ------------
-echo  USB отключено 
+echo  USB ╨╛╤В╨║╨╗╤О╤З╨╡╨╜╨╛ 
 echo  ------------
 echo.
 pause
@@ -55,32 +55,32 @@ goto x0
 cls
 echo.
 echo ------------------------------------------
-echo "Завершение процесса"
+echo "╨Ч╨░╨▓╨╡╤А╤И╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨░"
 TASKKILL /F /IM sethc.exe /T
 echo.
-echo "Смена владельца файла в Windows"
+echo "╨б╨╝╨╡╨╜╨░ ╨▓╨╗╨░╨┤╨╡╨╗╤М╤Ж╨░ ╤Д╨░╨╣╨╗╨░ ╨▓ Windows"
 echo.
 takeown /A /F "C:\Windows\System32\sethc.exe"
 echo.
 echo ------------------------------------------
-echo "Установка прав доступа"
-icacls C:\Windows\System32\sethc.exe /grant Администраторы:F
+echo "╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╤А╨░╨▓ ╨┤╨╛╤Б╤В╤Г╨┐╨░"
+icacls C:\Windows\System32\sethc.exe /grant ╨Р╨┤╨╝╨╕╨╜╨╕╤Б╤В╤А╨░╤В╨╛╤А╤Л:F
 
 echo.
 echo ------------------------------------------
-echo "Резервирование файла"
+echo "╨а╨╡╨╖╨╡╤А╨▓╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░"
 copy /Y C:\Windows\System32\sethc.exe C:\Windows\System32\sethc.exe.bak
 
 echo.
 echo -------------------------------------------
-echo "Переименование файла"
+echo "╨Я╨╡╤А╨╡╨╕╨╝╨╡╨╜╨╛╨▓╨░╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░"
 xcopy /F /H /R /Y C:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 echo.
 echo.
 echo  ---------------------------------------------------------------
-rem echo  Для вызова консоли нажать клавиши [WIN] [+] (Magnify.exe)
-echo  Настройка консоли для локального входа выполнена успешно.
-echo  Для вызова консоли нажать клавиши левый [ALT] [SHIFT] [PrtScrn]
+rem echo  ╨Ф╨╗╤П ╨▓╤Л╨╖╨╛╨▓╨░ ╨║╨╛╨╜╤Б╨╛╨╗╨╕ ╨╜╨░╨╢╨░╤В╤М ╨║╨╗╨░╨▓╨╕╤И╨╕ [WIN] [+] (Magnify.exe)
+echo  ╨Э╨░╤Б╤В╤А╨╛╨╣╨║╨░ ╨║╨╛╨╜╤Б╨╛╨╗╨╕ ╨┤╨╗╤П ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨│╨╛ ╨▓╤Е╨╛╨┤╨░ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨░ ╤Г╤Б╨┐╨╡╤И╨╜╨╛.
+echo  ╨Ф╨╗╤П ╨▓╤Л╨╖╨╛╨▓╨░ ╨║╨╛╨╜╤Б╨╛╨╗╨╕ ╨╜╨░╨╢╨░╤В╤М ╨║╨╗╨░╨▓╨╕╤И╨╕ ╨╗╨╡╨▓╤Л╨╣ [ALT] [SHIFT] [PrtScrn]
 echo  ---------------------------------------------------------------
 echo.
 pause
@@ -90,25 +90,25 @@ goto x00
 cls
 echo.
 echo ------------------------------------------
-echo "Завершение процесса"
+echo "╨Ч╨░╨▓╨╡╤А╤И╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨░"
 TASKKILL /F /IM sethc.exe /T
 echo.
-echo "Смена владельца файла в Windows"
+echo "╨б╨╝╨╡╨╜╨░ ╨▓╨╗╨░╨┤╨╡╨╗╤М╤Ж╨░ ╤Д╨░╨╣╨╗╨░ ╨▓ Windows"
 echo.
 rem takeown /A /F "C:\Windows\System32\Magnify.exe"
 takeown /A /F "C:\Windows\System32\sethc.exe"
 echo.
 echo ------------------------------------------
-echo "Установка прав доступа"
-icacls C:\Windows\System32\sethc.exe /grant Администраторы:F
+echo "╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨┐╤А╨░╨▓ ╨┤╨╛╤Б╤В╤Г╨┐╨░"
+icacls C:\Windows\System32\sethc.exe /grant ╨Р╨┤╨╝╨╕╨╜╨╕╤Б╤В╤А╨░╤В╨╛╤А╤Л:F
 echo.
 echo -------------------------------------------
-echo "Восстановление файла"
+echo "╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░"
 xcopy /F /H /R /Y C:\Windows\System32\sethc.exe.bak C:\Windows\System32\sethc.exe
 echo.
 echo.
 echo  ---------------------------------------
-echo  Восстановление файла выполнено успешно.
+echo  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╛ ╤Г╤Б╨┐╨╡╤И╨╜╨╛.
 echo  ---------------------------------------
 echo.
 pause
@@ -117,14 +117,14 @@ goto x00
 :x5
 cls
 echo.
-echo "Очистка следов \FarManager"
+echo "╨Ю╤З╨╕╤Б╤В╨║╨░ ╤Б╨╗╨╡╨┤╨╛╨▓ \FarManager"
 REG DELETE "HKCU\Software\Far Manager" /f
 REG DELETE HKCU\Software\7-ZIP /f
 C:
 rd /s /q %USERPROFILE%\"Local Settings\Far Manager"
 echo.
 echo -------------------------
-echo "Очистка следов \FarManager" выполнено.
+echo "╨Ю╤З╨╕╤Б╤В╨║╨░ ╤Б╨╗╨╡╨┤╨╛╨▓ \FarManager" ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╛.
 echo.
 pause
 goto x0
@@ -133,10 +133,10 @@ goto x0
 cls
 echo.
 echo  ----------------------------------------
-echo  Удаленная перезагрузка ПК (в домене)
+echo  ╨г╨┤╨░╨╗╨╡╨╜╨╜╨░╤П ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨░ ╨Я╨Ъ (╨▓ ╨┤╨╛╨╝╨╡╨╜╨╡)
 echo  ----------------------------------------
 echo.
-SET /P VSP=" Введите номер ГРУППЫ: "
+SET /P VSP=" ╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╜╨╛╨╝╨╡╤А ╨У╨а╨г╨Я╨Я╨л: "
 
 if /i '%VSP%'=='0001' goto x0001
 if /i '%VSP%'=='0365' goto x0002
@@ -145,7 +145,7 @@ if /i '%VSP%'=='0' goto x0
 
 :x0001
 echo.
-echo Выполняется удаленная перезагрузка ПК в ГРУППЕ AAA\%VSP%
+echo ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П ╤Г╨┤╨░╨╗╨╡╨╜╨╜╨░╤П ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨░ ╨Я╨Ъ ╨▓ ╨У╨а╨г╨Я╨Я╨Х AAA\%VSP%
 echo.
 start ping -a -t 192.168.0.101
 net use \\192.168.0.101\c$ /user:Administrator 12345678
@@ -155,7 +155,7 @@ goto x0
 
 :x0002
 echo.
-echo Выполняется удаленная перезагрузка ПК в ГРУППЕ BBB\%VSP%
+echo ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П ╤Г╨┤╨░╨╗╨╡╨╜╨╜╨░╤П ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨░ ╨Я╨Ъ ╨▓ ╨У╨а╨г╨Я╨Я╨Х BBB\%VSP%
 echo.
 start ping -a -t 192.168.0.102
 net use \\192.168.0.102\c$ /user:Administrator 12345678
@@ -165,7 +165,7 @@ goto x0
 
 :x0368
 echo.
-echo Выполняется удаленная перезагрузка ПК в ГРУППЕ 000\%VSP%
+echo ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П ╤Г╨┤╨░╨╗╨╡╨╜╨╜╨░╤П ╨┐╨╡╤А╨╡╨╖╨░╨│╤А╤Г╨╖╨║╨░ ╨Я╨Ъ ╨▓ ╨У╨а╨г╨Я╨Я╨Х 000\%VSP%
 echo.
 start ping -a -t 192.168.0.103
 net use \\192.168.0.103\c$ /user:Administrator 12345678
@@ -178,15 +178,15 @@ goto x0
 cls
 echo.
 echo -------------------------------------
-echo Установка сетевых настроек ПК
+echo ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╤Б╨╡╤В╨╡╨▓╤Л╤Е ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨Я╨Ъ
 echo -------------------------------------
 echo.
-set /p nm=" Имя компьютера: "
-set /p ip=" Введите IP: "
+set /p nm=" ╨Ш╨╝╤П ╨║╨╛╨╝╨┐╤М╤О╤В╨╡╤А╨░: "
+set /p ip=" ╨Т╨▓╨╡╨┤╨╕╤В╨╡ IP: "
 if "%ip%" == "0" (goto x03)
-set /p msk=" Введите маску: "
+set /p msk=" ╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╝╨░╤Б╨║╤Г: "
 if "%msk%" == "0" (goto x03)
-set /p gtw=" Введите шлюз: "
+set /p gtw=" ╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╤И╨╗╤О╨╖: "
 if "%gtw%" == "0" (goto x03)
 if "%nm%" == "0" (goto x02) else (goto x01)
 echo.
@@ -196,11 +196,11 @@ REG ADD HKLM\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName /v
 REG ADD HKLM\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName /v ComputerName /t REG_SZ /d "%nm%" /f
 REG ADD HKLM\SYSTEM\CurrentControlSet\services\Tcpip\Parameters /v "NV Hostname" /t REG_SZ /d "%nm%" /f
 :x02
-netsh interface ip set address name="Подключение по локальной сети" source=static addr=%ip% mask=%msk% gateway=%gtw%
-netsh interface ip set dns "Подключение по локальной сети" static 192.168.0.100
-netsh interface ip add dns "Подключение по локальной сети" 192.168.1.101
-netsh interface ip add dns "Подключение по локальной сети" 192.168.1.102
-netsh interface ip add dns "Подключение по локальной сети" 192.168.1.103
+netsh interface ip set address name="╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨╣ ╤Б╨╡╤В╨╕" source=static addr=%ip% mask=%msk% gateway=%gtw%
+netsh interface ip set dns "╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨╣ ╤Б╨╡╤В╨╕" static 192.168.0.100
+netsh interface ip add dns "╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨╣ ╤Б╨╡╤В╨╕" 192.168.1.101
+netsh interface ip add dns "╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨╣ ╤Б╨╡╤В╨╕" 192.168.1.102
+netsh interface ip add dns "╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛╨╣ ╤Б╨╡╤В╨╕" 192.168.1.103
 echo.
 :x03
 ipconfig /all
