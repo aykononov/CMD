@@ -248,7 +248,7 @@ Next
 
 
 ' ------------------ Mapped Network Disk  (Permission: Administrators) ---------------------------------
-fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>Mapped Network Disk</b><i>   ____ (for Local Administrators)</i></TD></TR>"
+fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>Mapped Network Disk</b><i>   ____ (access for Administrators)</i></TD></TR>"
 Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_MappedLogicalDisk",,48) 
 For Each objItem in colItems 
 fileOutput.WriteLn " <TR><TD width='30%' align=left bgcolor='#e0e0e0'>Mapped Disk (" & objItem.Name & ") <TD width='70%' align=left bgcolor='#f0f0f0'>" & objItem.ProviderName & "</td></tr>"
