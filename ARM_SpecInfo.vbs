@@ -254,100 +254,8 @@ For Each objItem in colItems
 fileOutput.WriteLn " <TR><TD width='30%' align=left bgcolor='#e0e0e0'>Mapped Disk (" & objItem.Name & ") <TD width='70%' align=left bgcolor='#f0f0f0'>" & objItem.ProviderName & "</td></tr>"
 Next
 
-'------------------ HWD Process.-------------------------------------------------------------
-'fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>HWD Process</b></TD></TR>"
-'fileOutput.WriteLn "                                        <tr><td colspan='2' bgcolor='#f0f0f0'>"
-'fileOutput.WriteLn "                                            <TABLE width='100%' cellspacing='1' cellpadding='2' border='1' bordercolor='#c0c0c0' bordercolordark='#ffffff' bordercolorlight='#c0c0c0'>"
-
-'Set colItem = objWMIService.ExecQuery ("SELECT * FROM Win32_Process Where Name = 'hwd.exe' ") 
-' Проверяем запущен ли процесс HWD.exe
-'	If colItem.Count = 0 Then
-'		fileOutput.WriteLn " <TR><TD width='40%' align=center bgcolor='#f0f0f0'>Daemon HWD</TD><td bgcolor=#f0d0d0 align=center>Not Running !!!</td></tr>"'
-'		Else
-'		For Each objItem in colItem
-'		objItem.GetOwner User
-'fileOutput.WriteLn " <TR><TD width='30%' align=center bgcolor='#c0c0c0'><b>Executable Path</b></td><TD width='40%' align=center bgcolor='#c0c0c0'><b>Process User</b><TD width='40%' align=center bgcolor='#c0c0c0'><b>Process State</b></td><tr>"
-'fileOutput.WriteLn " <TR><TD width='30%' align=left bgcolor='#ffffff'>" & objItem.ExecutablePath & "</td><TD width='40%' align=center bgcolor='d0f0d0'>" & User & "<TD width='40%' align=center bgcolor='d0f0d0'>Running</td><tr>"
-'			Next
-'	End If
-'fileOutput.WriteLn "                                            </table>"
-
-'------------------ Amicon FPSU --------------------------------------------------------
-'fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>Amicon Information</b></TD></TR>"
-'fileOutput.WriteLn "                                        <tr><td colspan='2' bgcolor='#f0f0f0'>"
-'fileOutput.WriteLn "                                            <TABLE width='100%' cellspacing='1' cellpadding='2' border='1' bordercolor='#c0c0c0' bordercolordark='#ffffff' bordercolorlight='#c0c0c0'>"
-
-' --------------------------------------------
-'Const HKEY_LOCAL_MACHINE = &H80000002
-'Const aKeyPath = "SOFTWARE\Amicon\Client FPSU-IP"
-
-'Const ParamVhi = "VersionHi"
-'Const ParamVlo = "VersionLo"
-'Const ParamVbn = "VersionBn"
-'Const ParamVs = "VpnKey_Serial"
-'Const ParamVin = "VpnKey_Inserted"
-
-'Set objReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\default:StdRegProv")
-' Чтение HEX - параметра реестра -------------------------
-'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVhi, HiVal
-'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVlo, LoVal
-'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVbn, BnVal
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVs, psVal
-'objReg.GetDWORDValue HKEY_LOCAL_MACHINE, aKeyPath, ParamVin, InVal
-'If HiVal <> "0" then
-'fileOutput.WriteLn " <TR><TD width='30%' align=center bgcolor='#c0c0c0'><b>Component</b></td><TD width='40%' align=center bgcolor='#c0c0c0'><b>Serial Number:</b><TD width='40%' align=center bgcolor='#c0c0c0'><b>Product Version</b></td><tr>"
-'	If psVal <> "0" Then
-'		fileOutput.WriteLn " <TR><TD width='30%' align=center bgcolor='#f0f0f0'>Amicon FPSU-IP/Client</td><TD width='40%' align=center bgcolor='#d0f0d0'>" & psVal & "<TD width='40%' align=center bgcolor='d0f0d0'>" & HiVal & "." & LoVal & "." & BnVal & "</td><tr>"
-'	Else
-'		fileOutput.WriteLn " <TR><TD width='30%' align=center bgcolor='#f0f0f0'>Amicon FPSU-IP/Client</td><TD width='40%' align=center bgcolor='#f0d0c0'>" & psVal & "<TD width='40%' align=center bgcolor='f0d0c0'>" & HiVal & "." & LoVal & "." & BnVal & "</td><tr>"
-'
-'        End If
-'Else
-'		fileOutput.WriteLn " <TR><TD width='40%' align=center bgcolor='#f0f0f0'>Amicon FPSU-IP/Client:</TD><td bgcolor=#f0f0f0 align=center>Not Used</td></tr>"'
-
-
-'End If
-'fileOutput.WriteLn "                                            </table>"
-
-'------------------ InfoCrypt Information --------------------------------------------------------
-'fileOutput.WriteLn "                                        <TR><TD bgcolor='#A0BACB' colspan='2'><b>InfoCrypt Information</b></TD></TR>"
-'fileOutput.WriteLn "                                        <tr><td colspan='2' bgcolor='#f0f0f0'>"
-'fileOutput.WriteLn "                                            <TABLE width='100%' cellspacing='1' cellpadding='2' border='1' bordercolor='#c0c0c0' bordercolordark='#ffffff' bordercolorlight='#c0c0c0'>"
-'fileOutput.WriteLn " <TR><TD width='20%' align=center bgcolor='#c0c0c0'><b>Component</b></td><TD width='40%' align=center bgcolor='#c0c0c0'><b>Executable Path</b><TD width='40%' align=center bgcolor='#c0c0c0'><b>Version</b></td><tr>"
-' ----------------------WinNet----------------------
-
-'Const tKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WinNet 3.0"
-'Const sKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sbersign50"
-'Const iadKeyPath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfoCryptAdmin"
-
-'Const Param1 = "UninstallString"
-'Const Param2 = "DisplayName"
-
-' Чтение Строкового параметра реестра -------------------------
-
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, tKeyPath, Param1, lVal
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, tKeyPath, Param2, pVal
-'If pVal <> "0" then
-'fileOutput.WriteLn " <TR><TD width='20%' align=center bgcolor='#f0f0f0'>WinNet</td><TD width='50%' align=left bgcolor='#ffffff'>" & lVal & "<TD width='40%' align=center bgcolor='#ffffff'>" & pVal & "</td><tr>"
-'End If
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, sKeyPath, Param1, lVal
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, sKeyPath, Param2, pVal
-'If pVal <> "0" then
-'fileOutput.WriteLn " <TR><TD width='20%' align=center bgcolor='#f0f0f0'>SberSign</td><TD width='50%' align=left bgcolor='#ffffff'>" & lVal & "<TD width='40%' align=center bgcolor='#ffffff'>" & pVal & "</td><tr>"
-'End If
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, iadKeyPath, Param1, lVal
-'objReg.GetStringValue HKEY_LOCAL_MACHINE, iadKeyPath, Param2, pVal
-'If pVal <> "0" then
-'fileOutput.WriteLn " <TR><TD width='20%' align=center bgcolor='#f0f0f0'>InfoCryptAdmin</td><TD width='50%' align=left bgcolor='#d0f0d0'>" & lVal & "<TD width='40%' align=center bgcolor='#d0f0d0'>" & pVal & "</td><tr>"
-'Else
-'fileOutput.WriteLn " <TR><TD width='20%' align=center bgcolor='#f0f0f0'>InfoCryptAdmin</td><TD width='50%' align=left bgcolor='#f0d0d0'>" & lVal & "<TD width='40%' align=center bgcolor='#f0d0d0'>" & pVal & "</td><tr>"
-
-'End If
-
-'fileOutput.WriteLn "                                            </table>"
-
-' ------------------ WinNet Users ---------------------------------
-'Const uKeyPath = "SOFTWARE\Infocrypt\WinNet 3.0\Users"
+' ------------------ WinNetUsers ---------------------------------
+'Const uKeyPath = "SOFTWARE\Inform\WinNetUsers\Users"
 
 
 ' -------- Чтение параметров ветки в массив arrValues
@@ -406,7 +314,8 @@ fileOutput.WriteLn "                       <TR><TD bgcolor='#FEF7D6' colspan='2'
 
 
 fileOutput.WriteLn "            </table>"
-fileOutput.WriteLn "            <p><small>2014, Alexandr Kononov (R)</small></p>"
+'fileOutput.WriteLn "            <p><small>2014, Alexandr Kononov (R)</small></p>"
+fileOutput.WriteLn "            <p><small><a href='https://github.com/aykononov'>github.com: Aleksandr Kononov</a></small></p>"
 fileOutput.WriteLn "        </center>"
 fileOutput.WriteLn "    </body>"
 fileOutput.WriteLn "<html>"
