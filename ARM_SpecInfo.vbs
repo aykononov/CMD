@@ -19,7 +19,6 @@ For Each IPConfig in IPconfigSet
 Next
 
 sTime = Now
-'Set objExplorer = CreateObject("InternetExplorer.Application")
 Set objExplorer = WScript.CreateObject("InternetExplorer.Application", "IE_")
 With objExplorer
     .Navigate "about:Blank"
@@ -49,7 +48,7 @@ fileOutput.WriteLn "   table   { font-size:90% }"
 fileOutput.WriteLn "</style>"
 fileOutput.WriteLn "        <center>"                    	
 fileOutput.WriteLn "                 <TABLE width='100%' cellspacing='1' cellpadding='2' border='1' bordercolor='#c0c0c0' bordercolordark='#ffffff' bordercolorlight='#c0c0c0'>"
-fileOutput.WriteLn "                       <TR style='font-size: 10pt'><TD style='color: #FFFFFF' width='100%' align=center bgcolor='#A0BACB' colspan='2'><b>ARM Special Information.</b></TD></TR>"
+fileOutput.WriteLn "                       <TR style='font-size: 10pt'><TD style='color: #FFFFFF' width='100%' align=center bgcolor='#A0BACB' colspan='2'><b>ARM Specification Information</b></TD></TR>"
 '----------------- This (start) current DateTime of the PC being scanned. ------------------------
 fileOutput.WriteLn "                       <TR><TD bgcolor='#FEF7D6' colspan='2'>Starting Time: " & sTime & "</TD></TR>"
 '----------------- PCName, UserName ---------------------------------------------------------
