@@ -1,5 +1,5 @@
-rem запустить службу:  sc start [service name]
-rem остановить службу: sc stop [service name]
-rem удалить службу:    sc delete [service name]
+rem Р·Р°РїСѓСЃС‚РёС‚СЊ СЃР»СѓР¶Р±Сѓ:  sc start [service name]
+rem РѕСЃС‚Р°РЅРѕРІРёС‚СЊ СЃР»СѓР¶Р±Сѓ: sc stop [service name]
+rem СѓРґР°Р»РёС‚СЊ СЃР»СѓР¶Р±Сѓ:    sc delete [service name]
 
 sc delete OracleRemExecServiceV2
