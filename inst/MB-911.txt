@@ -1,0 +1,269 @@
+https://bitbucket.lan.ubrr.ru/projects/UB/repos/ubrir-back/pull-requests/78/diff?commentId=1141#ubrir-app-back/da/src/test/java/ru/ubrir/ib/back/app/da/backoffice/sales/SalesHttpRequestBuilderTest.java
+
+Ревью:
+	MaskerUtilTest
+	SalesHttpRequestBuilderTest
+	OptionalUtilTest
+	DefaultQuickPaymentStorageManagerTest
+
+	ConfirmationCodeFieldMapperTest.java
+	// TODO: Вызов метода nonNullAnnotationTest() выводит сообщение:
+	//		 "Параметр в публичном методе valueOf не аннотирован  NonNull/@Nullable"
+	//       При добавлении в исключение метода "valueOf" выпадает исключение:
+	//       "java.lang.NullPointerException
+	//	     at ru.ubrir.ib.back.app.common.test.testing.BaseCommonTest.assertNonNullAnnotation(BaseCommonTest.java:175)"
+	//       Нужно дорабатывать сам тест nonNullAnnotationTest().
+
+Ищем:
+    @TestUnitRepeatOnce
+    void convertWithNullArgumentsThrowsExceptionTest() {
+        assertThrows(NullPointerException.class, () -> converter.convert(null));
+    }
+
+    @TestUnit
+    void convertNonNullTest() {
+        assertThrows(NullPointerException.class, () -> new WebToDomainAddAbonentRequestConverter().convert(null));
+    }
+
+assertThrows(
+                NullPointerException.class
+
+
+Меняем на:
+    @TestUnitRepeatOnce
+    void nonNullAnnotationTest() throws Exception {
+        assertNonNullAnnotation(TestingClass.class);
+    }
+
+
+Проверяем:
+@NonNull - lombok (параметр НЕ ДОЛЖЕН быть нулевым)
+@Nullable - spring (на примитивы - технически можете передать нулевое значение)
+
+
+
+Удаляем из супресса: magicnumber, CheckStyle
+Оставляем:
+@SuppressWarnings({"unchecked", "ResultOfMethodCallIgnored", "ConstantConditions"})
+
+
+В Абстрастрактных классах берем класс из:
+    @InjectMocks
+    private DbvDepositTwoBackOfficeProductRepo productRepo; 
+
+Не завелись:
+-AbstractBackOfficeProviderTest
+    @Mock
+    private BackOfficeService backOfficeService;
+
+    @Mock
+    private XmlRequestConverter xmlRequestConverter;
+
+    @Mock
+    private XmlResponseConverter xmlResponseConverter;
+
+    @InjectMocks
+    private XmlBackOfficeProvider<AbstractBackOfficeBaseResponse, Operation> provider;
+
+-AbstractDepositBackOfficeProductRepoTest
+BaseIndividualDpkCreditProductReportParameterBuilder
+CacheStorageClientTest
+ConfirmationCodeFieldMapperTest -> enum
+DatabaseStorageClientTest
+DefaultBankServiceTest
+DefaultDomainBackOfficeService
+DefaultFtpClientTest
+-DefaultQuickPaymentStorageManagerTest -> extends QuickPaymentUtil
+DefaultRegisterDepositProductPropertyServiceTest
+DefaultSystemServiceTest
+DomainDomainDomainSmartPaymentAliasCardBuilderTest
+DomainDomainSmartPaymentAccountBuilderTest
+DomainDomainSmartPaymentAliasBuilderTest
+DomainVendorFieldVisibilityMatcherTest
+-DomainVendorServiceRequestConverterTest
+EnumUtilTest
+FtpStorageClientTest
+GetCurrencyRatesRequestConverterTest
+HashCalculatorTest
+OptionalUtilTest
+-QuickPaymentCommonPropertyTest -> extends QuickPaymentUtil
+QuickPaymentImageUrlMatcherTest
+QuickPaymentImageUrlMatcherTest
+QuickPaymentOperationHandlerTest -> extends QuickPaymentUtil
+-QuickPaymentStateInterceptorTest
+SimpleDomainBackOfficeServiceTest
+XmlRequestConverterTest
+
+VendorServiceFieldParserTest 
+- тест работал, но высвечивалась ошибка в:
+    val expectedQRKeyList = isNotBlank(expectedQRKeys) ? Arrays.asList(expectedQRKeys.split(DELIMITER)) : emptyList();
+исправить на:
+    val expectedQRKeyList = isNotBlank(expectedQRKeys) ? Arrays.asList(expectedQRKeys.split(DELIMITER)) : Collections.<String>emptyList();
+
+Сочетания клафиш:
+CTRL+ALT+Z - откат класса на нужный класс из гита
+
+Исключения для методов:
+,"", "", "", "", "", "",
+"", "", "", "", "", "",
+"", "", "", "", "", "", 
+"", "", "", "", "", "",
+"", "", "", "", "", "", 
+"", "", "", "", "", "",
+"", "", "", "", "", "", 
+"", "", "", "", "", ""
+
+В тестах, которые не завелись исправляем метод:
+
+    @BeforeEach
+    void setUp() {
+        initMocks(this);
+        dictionary = createIconDictionary();
+        when(dictionaryService.getDictionary(TEMPLATE_DATA, TEMPLATE_IMAGE.name())).thenReturn(Optional.of(dictionary));
+        when(resourceService.getAbsoluteResourcePath(TEMPLATE_IMAGE))
+                .thenReturn(RANDOM.nextRandomUrl() + TEMPLATE_IMAGE.getDefaultName() + TEMPLATE_IMAGE.getDefaultExtension());
+    }
+на:
+    @Override
+    public void beforeEachCommon() {
+        dictionary = createIconDictionary();
+        when(dictionaryService.getDictionary(TEMPLATE_DATA, TEMPLATE_IMAGE.name())).thenReturn(Optional.of(dictionary));
+        when(resourceService.getAbsoluteResourcePath(TEMPLATE_IMAGE))
+                .thenReturn(RANDOM.nextRandomUrl() + TEMPLATE_IMAGE.getDefaultName() + TEMPLATE_IMAGE.getDefaultExtension());
+    }
+
+
+В XmlRequestConverterTest.java
+
+    @BeforeEach
+    void setUp() {
+        val newMarshaller = new Jaxb2Marshaller();
+        newMarshaller.setPackagesToScan("ru.ubrir.ib.back.app.da.model.backoffice.two.operation");
+
+        marshaller = newMarshaller;
+    }
+
+на:
+
+    @Override
+    public void beforeEachCommon() {
+        val newMarshaller = new Jaxb2Marshaller();
+        newMarshaller.setPackagesToScan("ru.ubrir.ib.back.app.da.model.backoffice.two.operation");
+
+        marshaller = newMarshaller;
+    }
+
+
+В FtpStorageClientTest.java
+
+    @BeforeEach
+    void setUp() throws Exception {
+        initMocks(this);
+
+        val property = FtpClientProperty.builder()
+                .storageName(RANDOM.nextEnum(StorageName.values()))
+                .hostname(RANDOM.nextUUIDString())
+                .port(RANDOM.nextInt())
+                .connectTimeout(RANDOM.nextInt())
+                .repeatCount(REPEAT_COUNT)
+                .username(RANDOM.nextUUIDString())
+                .password(RANDOM.nextUUIDString())
+                .path(RANDOM.nextUUIDString())
+                .build();
+        when(clientPool.borrowObject()).thenReturn(client);
+
+        storageClient = new FtpStorageClient(property, clientPool);
+    }
+на:
+    @Override
+    public void beforeEachCommon() {
+        val property = FtpClientProperty.builder()
+                .storageName(RANDOM.nextEnum(StorageName.values()))
+                .hostname(RANDOM.nextUUIDString())
+                .port(RANDOM.nextInt())
+                .connectTimeout(RANDOM.nextInt())
+                .repeatCount(REPEAT_COUNT)
+                .username(RANDOM.nextUUIDString())
+                .password(RANDOM.nextUUIDString())
+                .path(RANDOM.nextUUIDString())
+                .build();
+
+        storageClient = new FtpStorageClient(property, clientPool);
+    }
+
+
+В QuickPaymentImageUrlMatcherTest.java
+    @BeforeEach
+    void setUp() {
+        initMocks(this);
+        dictionary = createIconDictionary();
+        when(dictionaryService.getDictionary(TEMPLATE_DATA, TEMPLATE_IMAGE.name())).thenReturn(Optional.of(dictionary));
+        when(resourceService.getAbsoluteResourcePath(TEMPLATE_IMAGE))
+                .thenReturn(RANDOM.nextRandomUrl() + TEMPLATE_IMAGE.getDefaultName() + TEMPLATE_IMAGE.getDefaultExtension());
+    }
+на:
+    @Override
+    public void beforeEachCommon() {
+        dictionary = createIconDictionary();
+        when(dictionaryService.getDictionary(TEMPLATE_DATA, TEMPLATE_IMAGE.name())).thenReturn(Optional.of(dictionary));
+        when(resourceService.getAbsoluteResourcePath(TEMPLATE_IMAGE))
+                .thenReturn(RANDOM.nextRandomUrl() + TEMPLATE_IMAGE.getDefaultName() + TEMPLATE_IMAGE.getDefaultExtension());
+    }
+
+В DatabaseStorageClientTest.java
+    @BeforeEach
+    void setUp() {
+        val property = DatabaseClientProperty.builder()
+                .storageName(RANDOM.nextEnum(StorageName.values()))
+                .build();
+        storageDataRepo = mock(StorageDataRepo.class);
+        storageClient = new DatabaseStorageClient(property, storageDataRepo);
+    }
+на:
+    @Override
+    public void beforeEachCommon() {
+        val property = DatabaseClientProperty.builder()
+                .storageName(RANDOM.nextEnum(StorageName.values()))
+                .build();
+        storageDataRepo = mock(StorageDataRepo.class);
+        storageClient = new DatabaseStorageClient(property, storageDataRepo);
+    }
+
+В DomainVendorFieldVisibilityMatcherTest.java
+    @BeforeEach
+    void setUp() {
+        initMocks(this);
+        filterSet.add(filter);
+        matcher = new DomainVendorFieldVisibilityMatcher(filterSet);
+    }
+на:
+    @Override
+    public void beforeEachCommon() {
+        filterSet.add(filter);
+        matcher = new DomainVendorFieldVisibilityMatcher(filterSet);
+    }
+
+// TODO: Вызов метода nonNullAnnotationTest() выводит сообщение:
+//       "Параметр в публичном методе valueOf не аннотирован @NonNull/@Nullable"
+//       При добавлении в исключение метода "valueOf" выпадает исключение:
+//       "java.lang.NullPointerException
+//       at ru.ubrir.ib.back.app.common.test.testing.BaseCommonTest.assertNonNullAnnotation(BaseCommonTest.java:175)"
+//       Нужно дорабатывать сам тест nonNullAnnotationTest().
+
+
+Merge conflict
+
+
+This pull request has conflicts.
+
+You must resolve the conflicts by manually merging dev into this branch. After the conflicts are resolved you will be able to merge the pull request.
+
+Step 1: Checkout the source branch and merge in the changes from the target branch. Resolve conflicts.
+
+git checkout tech/MB-911
+git pull origin dev
+Step 2: After the merge conflicts are resolved, stage the changes accordingly, commit the changes and push.
+
+git commit
+git push origin HEAD
+Step 3: Merge the updated pull request.
